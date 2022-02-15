@@ -1,15 +1,14 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <traffic-light></traffic-light>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import TrafficLight from './components/TrafficLight.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    TrafficLight,
   }
 }
 </script>
@@ -22,5 +21,8 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100v;
 }
 </style>
