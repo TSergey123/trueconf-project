@@ -1,5 +1,5 @@
 <template>
-    <h2>{{fullName}}</h2>
+    <h2>{{routeName}}</h2>
   <div class="traffic-light">
     <ul class="traffic-light__colors-list">
       <li
@@ -26,31 +26,36 @@ export default {
       isBlinking: false,
       isActive: false,
       counter: 0,
-      fullName: 'qwerty'
+      routeName: ''
     }
   },
   updated() {
-    // console.log(this.$route.name)
-    //  if (this.$route.name == 'traffic-light') {
-    //   console.log(this.$route.name)
-    //   this.$router.push({ name: 'light-red' });
-    // }
-    // if (this.$route.name == 'light-red') {
-    //   this.counter = 10
-    //   console.log(this.$route.name)
-    //   setTimeout(() => this.$router.push({ name: 'light-yellow' }), 10000);
-    // }
-    // if (this.$route.name == 'light-yellow') {
-    //   this.counter = 3
-    //   console.log(this.$route.name)
-    //   setTimeout(() => this.$router.push({ name: 'light-green' }), 3000);
-
-    // }
-    // if (this.$route.name == 'light-green') {
-    //   this.counter = 15
-    //   console.log(this.$route.name)
-    //   setTimeout(() => this.$router.push({ name: 'light-red' }), 15000);
-    // }
+    if (this.$route.name == 'traffic-light') {
+      this.routeName = this.$route.name;
+      console.log('updated ' + this.$route.name)
+      this.$router.push({ name: 'light-red' });
+    }
+    if (this.$route.name == 'light-red') {
+      this.routeName = this.$route.name;
+      this.counter = 10
+      console.log('updated ' + this.$route.name)
+      setTimeout(() => {--this.counter}, 1000)
+      setTimeout(() => this.$router.push({ name: 'light-yellow' }), 10000);
+    }
+    if (this.$route.name == 'light-yellow') {
+      this.routeName = this.$route.name;
+      this.counter = 3
+      console.log('updated ' + this.$route.name)
+      setTimeout(() => {--this.counter}, 1000)
+      setTimeout(() => this.$router.push({ name: 'light-green' }), 3000);
+    }
+    if (this.$route.name == 'light-green') {
+      this.routeName = this.$route.name;
+      this.counter = 15
+      console.log('updated ' + this.$route.name)
+      setTimeout(() => {--this.counter}, 1000)
+      setTimeout(() => this.$router.push({ name: 'light-red' }), 15000);
+    }
   },
    methods: {
     countDown() {
@@ -59,59 +64,13 @@ export default {
           this.countDown()
         }, 1000)
     },
-    changeLight() {
-    if (this.$route.name == 'traffic-light') {
-      console.log(this.$route.name)
-      this.$router.push({ name: 'light-red' });
-    }
-    if (this.$route.name == 'light-red') {
-      this.counter === 10
-      console.log(this.$route.name)
-      setTimeout(() => this.$router.push({ name: 'light-yellow' }), 10000);
-    }
-    if (this.$route.name == 'light-yellow') {
-      this.counter === 3
-      console.log(this.$route.name)
-      setTimeout(() => this.$router.push({ name: 'light-green' }), 3000);
-    }
-    if (this.$route.name == 'light-green') {
-      this.counter === 15
-      console.log(this.$route.name)
-      setTimeout(() => this.$router.push({ name: 'light-red' }), 15000);
-    }
-    }
-  },
-  watch() {
-    if (this.$route.name == 'light-red') {
-      this.counter = 10
-    }
-    if (this.$route.name == 'light-yellow') {
-      this.counter === 3
-    }
-    if (this.$route.name == 'light-green') {
-      this.counter === 15
-    }
   },
   computed: {
-    changeName() {
-      console.log('light')
-     return this.fullName === 'Light';
-    },
-    changeMyLight() {
-      console.log('computed ' + this.$route.name)
-      return this.counter;
-    },
     currentRoute() {
       console.log('currentRoute ' + this.$route.name)
       return this.$route.name
     },
   },
-   mounted() {
-    console.log('mounted ' + this.$route.name)
-    this.changeLight();
-    this.countDown();
-  },
-  
 }
 </script>
 <style>
